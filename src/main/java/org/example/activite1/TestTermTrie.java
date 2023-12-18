@@ -24,7 +24,8 @@ public class TestTermTrie {
                 }
                 String[] parts = line.split(";");
                 int id = Integer.parseInt(parts[0]);
-                String term = parts[1];
+                //retirer les guillemets
+                String term = parts[1].replaceAll("\"", "");
                 termTrie.addTerm(term, id);
             }
         } catch (IOException e) {
@@ -32,16 +33,18 @@ public class TestTermTrie {
         }
 
         long endTime = System.currentTimeMillis();
-        System.out.println("Temps de création de la structure : " + (endTime - startTime) + " ms");
+        System.out.println("Temps de création de la structure : " + (endTime - startTime) + " ms\n");
 
-        // Tester la fonction 1
-        System.out.println(termTrie.findTermId("Maria Callas")); // devrait afficher 16
-        System.out.println(termTrie.findTermId("MotInexistant")); // devrait afficher -1
+        //mesurer les temps de recherche
+        termTrie.searchTime("Maria Callas", 1);
 
-        // Tester la fonction 2
-        List<Map.Entry<String, Integer>> prefixResults = termTrie.findTermsByPrefix("Dead");
-        for (Map.Entry<String, Integer> entry : prefixResults) {
-            System.out.println(entry.getKey() + " => " + entry.getValue());
-        }
+        termTrie.searchTime("petit", 2);
+
+        termTrie.searchTime("petit chat", 2);
+
+        termTrie.searchTime("chat de", 3);
+
+
+
     }
 }
