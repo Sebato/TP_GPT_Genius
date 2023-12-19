@@ -51,7 +51,7 @@ public class TestTermTrie {
         }
 
         long endTime = System.currentTimeMillis();
-        System.out.println("Temps de création de la structure : " + (endTime - startTime) + " ms\n");
+        System.out.println("Temps de création de la structure : " + (endTime - startTime) + " ms");
 
 //      mesurer les temps de recherche
 //        termTrie.searchTime("Maria Callas", 1, true);
@@ -66,20 +66,18 @@ public class TestTermTrie {
 
         // Méthode qui mesure le temps de recherche des termes
         long[] termtime = searchTermsAndMeasureTime(termTrie, nTerms);
-        System.out.println("\n\n");
         // Méthode qui mesure le temps de recherche des mots préfixés
         long[] prefixtime = searchPrefixesAndMeasureTime(termTrie, nTerms);
 
 
-        System.out.println("Temps global de recherche des "+nbtermes+" termes : " + termtime[0] + "ns");
-        System.out.println("Temps moyen de recherche d'un terme : " + termtime[1] + " ns");
+        System.out.println("\nTemps global de recherche des "+nbtermes+" termes : " + termtime[0] + " ns ("+termtime[0]/1000000f+" ms)");
+        System.out.println("Temps moyen de recherche d'un terme : " + termtime[1] + " ns ("+termtime[1]/1000000f+" ms)");
 
-        System.out.println("Temps global de recherche des "+nbtermes+" prefixes : " + prefixtime[0] + " ns");
-        System.out.println("Temps moyen de recherche des prefixes d'un terme : " + prefixtime[1] + " ns");
+        System.out.println("\nTemps global de recherche des "+nbtermes+" prefixes : " + prefixtime[0] + " ns ("+prefixtime[0]/1000000f+" ms)");
+        System.out.println("Temps moyen de recherche des prefixes d'un terme : " + prefixtime[1] + " ns ("+prefixtime[1]/1000000f+" ms)");
     }
 
     private static long[] searchTermsAndMeasureTime(TermTrie termTrie, List<String> terms) {
-        System.out.println("Recherche de termes :");
 
         long startTime = System.nanoTime();
 
@@ -97,12 +95,10 @@ public class TestTermTrie {
         long globalTime = endTime - startTime;
         long averageTime = globalTime / terms.size();
 
-
         return new long[] {globalTime, averageTime};
     }
 
     private static long[] searchPrefixesAndMeasureTime(TermTrie termTrie, List<String> terms) {
-        System.out.println("\nRecherche de mots préfixés :");
 
         long startTime = System.nanoTime();
 
